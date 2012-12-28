@@ -30,7 +30,7 @@ class lextjs_base {
         }
     }
 
-    protected  function lext_render($children = null) {
+    public  function lext_render($children = null) {
         $data = "";
 
         error_log("base rendering...");
@@ -104,12 +104,12 @@ class lextjs_container extends lextjs_component {
         return $this;
     }
 
-    public function lrender() {
-        error_log("lextjs_container::lrender");
+    public function lext_render() {
+        error_log("lextjs_container::lext_render");
         return parent::lext_render($this->children);
     }
 
-}
+}/* ERROR */
 
 class lextjs extends lextjs_container {
 
@@ -119,9 +119,9 @@ class lextjs extends lextjs_container {
     }
 
 
-    public function lrender() {
-       //echo parent::lrender();
-       echo View::make('lextjs-view')->with('render', parent::lrender());
+    public function lext_render() {
+       //echo parent::lext_render();
+       echo View::make('lextjs-view')->with('render', parent::lext_render());
     }
 
 
@@ -164,6 +164,4 @@ $lextjs = lextjs::make()
     );
 
 //print_r($lextjs);
-//$lextjs->lrender();
-
-
+//$lextjs->lext_render();
