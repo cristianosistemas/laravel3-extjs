@@ -14,6 +14,8 @@
  *
  */
 
+
+
 class lextjs_base {
     protected $xargs = array();
 
@@ -55,36 +57,30 @@ class lextjs_base {
 
         if ($children) {
             error_log("rendering children...");
-            $data .= $this->lext_render_children($children);
+
+            $first_flag = true;
+
+            $data .= ", items: [\n";
+            foreach ($children as $item) {
+
+                if (!$first_flag) {
+                    $data .= ",\n";
+                }
+                $first_flag = false;
+
+                $data .= '{';
+                error_log("rendering child:");
+                $data .= $item->lext_render();
+                $data .= '}';
+            }
+
+            $data .= " ]\n";
         }
 
         error_log("rendered data: $data");
 
         return $data;
     }
-
-    private function lext_render_children($children) {
-        $first_flag = true;
-
-        $data = ", items: [\n";
-        foreach ($children as $item) {
-
-            if (!$first_flag) {
-                $data .= ",\n";
-            }
-            $first_flag = false;
-
-            $data .= '{';
-            error_log("rendering child:");
-            $data .= $item->lext_render();
-            $data .= '}';
-        }
-
-        $data .= "\n]\n";
-
-        return $data;
-    }
-
 }
 
 class lextjs_component extends lextjs_base {
