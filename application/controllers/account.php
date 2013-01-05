@@ -13,11 +13,12 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
-require_once('lextjs.php');
+
 
 class Account_Controller extends Base_Controller {
+
     public function action_index() {
-        echo "This is the account index.";
+        return "This is the account index.";
     }
 
     public function action_login() {
@@ -28,17 +29,42 @@ class Account_Controller extends Base_Controller {
         echo Form::close();
 
     }
-    public function action_lextjs() {
-        $lextjs = lextjs::make()
-            ->with(lextjs::menu(200)
-                ->with(lextjs::menuitem("hi"))
-                ->with(lextjs::menuitem("ho"))
-                ->with(lextjs::menuitem("ha"))
 
+
+    public function action_demo() {
+
+        $menu = lextjs::menu(200)
+            ->with(lextjs::menuitem("hi"))
+            ->with(lextjs::menuitem("ho"))
+            ->with(lextjs::menuitem("ha"));
+
+        $menubutton = lextjs::buttonmenu("Button Menu", false)
+            ->with(lextjs::buttonitem("mb1", new LextjsClosure("alert('Item 1 clicked');")))
+            ->with(lextjs::buttonitem("mb2", new LextjsClosure("alert('Item 2 clicked');")))
+            ->with(lextjs::buttonitem("mb3", new LextjsClosure("alert('Item 3 clicked');")));
+
+        $regularbutton = lextjs::button("Regular button");
+
+        //$panel = lextjs::panel()->with($regularbutton)->with($menubutton)->with($menu);
+
+        $panel = lextjs::panel("My First Panel", null, true)->with(
+            lextjs::toolbar(400)->with($menubutton)->with(lextjs::tbspacer(50))->with(lextjs::tbseparator())
         );
 
-        //print_r($lextjs);
-        $lextjs->lrender();
-    }
+        $lext_js = Lextjs::make()
+            ->with($panel)
+            ;
 
+        $lext_form = Lextjs::form("My First Form", "http://www.quantum-logic.com")
+            ->with(lextjs::formset("My First Field Set")->with(lextjs::formtext('My first text field')));
+
+        $lext_js = Lextjs::make()
+            ->with($lext_form)
+        ;
+
+
+        $lext_js->render();
+
+    }
 }
+

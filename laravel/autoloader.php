@@ -112,7 +112,7 @@ class Autoloader {
 
 		// Once we have formatted the class name, we'll simply spin through
 		// the registered PSR-0 directories and attempt to locate and load
-		// the class file into the script.
+		// the class file into the script
 		foreach ((array) $directories as $directory)
 		{
 			if (file_exists($path = $directory.$lower.EXT))

@@ -37,9 +37,7 @@ text: 'regular item 3'
     <script type="text/javascript">
         Ext.onReady(function() {
 
-            Ext.create('Ext.container.Viewport', {
-                <?php echo $render."\n"; ?>
-                });
+            Ext.create('Ext.container.Viewport', { layout: 'border' <?php echo $render."\n"; ?> });
 
         });
     </script>
