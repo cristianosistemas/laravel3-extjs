@@ -15,7 +15,7 @@
  */
 
 
-abstract class LextjsSuperclass {
+abstract class LextjsBase {
     protected $xargs = array();
 
     public function __construct($default_xargs = null, $user_xargs = null) {
@@ -87,7 +87,7 @@ abstract class LextjsSuperclass {
 }
 
 
- class LextjsComponent extends LextjsSuperclass {
+ class LextjsComponent extends LextjsBase {
 
 }
 
